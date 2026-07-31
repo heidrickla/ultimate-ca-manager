@@ -482,6 +482,7 @@
     "termsOfServiceBodyPlaceholder": "Rédigez vos conditions ici...\n\nSupporte : **gras**, *italique*, [liens](url), - listes\n\nUtilisez des lignes vides pour les paragraphes.",
     "termsOfServiceHelper": "Texte brut avec formatage type markdown. Utilisez des lignes vides pour les paragraphes.",
     "termsOfServicePreview": "Aperçu",
+    "termsOfServicePreviewHint": "Aperçu approximatif — la page des conditions publiée affiche du texte brut avec des liens cliquables ; la mise en forme Markdown n'y est pas appliquée.",
     "termsOfServiceUrl": "URL des CGU",
     "certificateAuthority": "Autorité de certification",
     "certificateAuthorityHelper": "Quelle CA ACME émet ce certificat. Laissez sur défaut pour utiliser la CA configurée.",

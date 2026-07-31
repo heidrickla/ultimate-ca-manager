@@ -1516,6 +1516,7 @@
     "termsOfServiceBodyPlaceholder": "Write your terms here...\n\nSupports: **bold**, *italic*, [links](url), - lists\n\nUse double empty lines for paragraphs.",
     "termsOfServiceHelper": "Plain text with markdown-like formatting. Use empty lines for paragraphs.",
     "termsOfServicePreview": "Preview",
+    "termsOfServicePreviewHint": "Approximate preview — the published terms page shows plain text with clickable links; markdown formatting is not applied there.",
     "termsOfServiceUrl": "Terms of Service URL",
     "certificateAuthority": "Certificate Authority",
     "certificateAuthorityHelper": "Which ACME CA issues this certificate. Leave on default to use the configured CA.",

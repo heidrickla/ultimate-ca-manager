@@ -252,7 +252,11 @@ export default function ConfigTab({ acmeSettings, cas, updateSetting, onSaveConf
           <p className="text-xs text-text-tertiary">{t('acme.termsOfServiceHelper')}</p>
           {editPreview && (
             <div className="rounded-lg border border-border bg-bg-tertiary p-3">
-              <p className="text-xs text-text-tertiary mb-2">{t('acme.termsOfServicePreview')}</p>
+              <p className="text-xs text-text-tertiary">{t('acme.termsOfServicePreview')}</p>
+              {/* The preview renders full markdown; the public /acme/terms
+                  page renders plain text with autolinked URLs only — say so
+                  where the admin is authoring, not just in the changelog. */}
+              <p className="text-xs text-text-tertiary italic mb-2">{t('acme.termsOfServicePreviewHint')}</p>
               <div className="text-xs text-text-secondary"><TosPreview body={editBody} /></div>
             </div>
           )}

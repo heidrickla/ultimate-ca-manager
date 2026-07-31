@@ -1516,6 +1516,7 @@
     "termsOfServiceBodyPlaceholder": "Scrivi i tuoi termini qui...\n\nSupporta: **grassetto**, *corsivo*, [link](url), - elenchi\n\nUsa righe vuote per i paragrafi.",
     "termsOfServiceHelper": "Testo semplice con formattazione tipo markdown. Usa righe vuote per i paragrafi.",
     "termsOfServicePreview": "Anteprima",
+    "termsOfServicePreviewHint": "Anteprima approssimativa: la pagina dei termini pubblicata mostra testo semplice con collegamenti cliccabili; la formattazione Markdown non viene applicata.",
     "termsOfServiceUrl": "URL dei Termini di Servizio",
     "certificateAuthority": "Autorità di certificazione",
     "certificateAuthorityHelper": "Quale CA ACME emette questo certificato. Lascia il valore predefinito per usare la CA configurata.",

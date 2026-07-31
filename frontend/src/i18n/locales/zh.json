@@ -1516,6 +1516,7 @@
     "termsOfServiceBodyPlaceholder": "在此输入条款...\n\n支持：**加粗**, *斜体*, [链接](url), - 列表\n\n空行分隔段落。",
     "termsOfServiceHelper": "纯文本，支持 Markdown 格式。空行分隔段落。",
     "termsOfServicePreview": "预览",
+    "termsOfServicePreviewHint": "预览仅供参考——发布的条款页面只显示带可点击链接的纯文本，不会应用 Markdown 格式。",
     "termsOfServiceUrl": "服务条款 URL",
     "certificateAuthority": "证书颁发机构",
     "certificateAuthorityHelper": "由哪个 ACME CA 颁发此证书。保持默认以使用已配置的 CA。",

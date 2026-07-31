@@ -520,6 +520,43 @@ def directory():
     return acme_response(directory_data)
 
 
+# --- /acme/terms body autolinking ------------------------------------------
+# The autolink runs AFTER HTML-escaping, so a quote or angle bracket next to
+# a URL is no longer a raw character the URL pattern could exclude: it is an
+# entity (&quot; &#x27; &lt; &gt;) made entirely of URL-legal characters, and
+# a plain substitution swallows it into the href, where the browser decodes
+# it back — turning "https://example.com/tos" into a link to
+# https://example.com/tos" (a 404). The callback below cuts the candidate at
+# the first such entity and additionally trims trailing sentence punctuation,
+# re-emitting the cut text after the anchor.
+_TOS_URL_RE = re.compile(r'https?://[^\s<>()"\']+')
+# Entities the terms_of_service() escaper can produce for characters that are
+# never legal inside a URL. &amp; is deliberately absent: it encodes a
+# literal &, which is a legal and common URL character (query strings).
+_TOS_ESCAPE_ENTITY_RE = re.compile(r'&(?:quot|#x27|lt|gt);')
+# Sentence punctuation directly after a URL belongs to the prose, not the
+# URL. The lookbehind keeps the terminating ; of a trailing &amp; intact.
+_TOS_TRAILING_PUNCT_RE = re.compile(r'(?:[.,:!?]|(?<!&amp);)+$')
+
+
+def _tos_autolink(match):
+    """Build an anchor from one escaped-text URL candidate.
+
+    Everything from the first escape entity on, plus trailing sentence
+    punctuation, is prose the character class could not exclude — emit it
+    as text after the </a> instead of leaving it inside the href.
+    """
+    url = match.group(0)
+    tail = ''
+    entity = _TOS_ESCAPE_ENTITY_RE.search(url)
+    if entity:
+        url, tail = url[:entity.start()], url[entity.start():]
+    punct = _TOS_TRAILING_PUNCT_RE.search(url)
+    if punct:
+        url, tail = url[:punct.start()], url[punct.start():] + tail
+    return f'<a href="{url}" target="_blank" rel="noopener">{url}</a>{tail}'
+
+
 @acme_bp.route('/terms', methods=['GET'])
 def terms_of_service():
     """Serve ACME Terms of Service content (RFC 8555 Section 7.1.1).
@@ -556,18 +593,22 @@ def terms_of_service():
                 block = (block.replace('&', '&amp;').replace('<', '&lt;')
                          .replace('>', '&gt;').replace('"', '&quot;')
                          .replace("'", '&#x27;'))
-                # Auto-linkify URLs (after escaping; quotes can no longer
-                # appear raw, and the class excludes them defensively)
-                block = re.sub(
-                    r'(https?://[^\s<>()"\']+)',
-                    r'<a href="\1" target="_blank" rel="noopener">\1</a>',
-                    block
-                )
+                # Auto-linkify URLs. Escaping ran first, so a quote can only
+                # reach this point as an entity — which is why the plain
+                # character class is not enough: _tos_autolink() keeps those
+                # entities (and trailing punctuation) out of the href.
+                block = _TOS_URL_RE.sub(_tos_autolink, block)
                 # Convert single newlines within paragraph to <br>
                 block = block.replace('\n', '<br>')
                 paragraphs.append(block)
     
-    title_html = title.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+    # Escape the same five characters as the body path. The title is only
+    # interpolated into element content today, so quotes are not exploitable
+    # here — but keeping the two escapers symmetric means a future attribute
+    # interpolation cannot silently reintroduce the quote bug fixed above.
+    title_html = (title.replace('&', '&amp;').replace('<', '&lt;')
+                  .replace('>', '&gt;').replace('"', '&quot;')
+                  .replace("'", '&#x27;'))
     updated = utc_now().strftime('%B %d, %Y')
     paragraphs_html = ''.join(f'<p>{p}</p>' for p in paragraphs)
     title_html_tag = f'<h1>{title_html}</h1>' if title_html else ''

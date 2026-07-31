@@ -1516,6 +1516,7 @@
     "termsOfServiceBodyPlaceholder": "Schreiben Sie hier Ihre Bedingungen...\n\nUnterstützt: **Fett**, *Kursiv*, [Links](url), - Listen\n\nLeerzeilen für Absätze verwenden.",
     "termsOfServiceHelper": "Klartext mit Markdown-ähnlicher Formatierung. Leerzeilen für Absätze verwenden.",
     "termsOfServicePreview": "Vorschau",
+    "termsOfServicePreviewHint": "Ungefähre Vorschau — die veröffentlichte Seite der Nutzungsbedingungen zeigt nur Text mit anklickbaren Links; Markdown-Formatierung wird dort nicht angewendet.",
     "termsOfServiceUrl": "URL der Nutzungsbedingungen",
     "certificateAuthority": "Zertifizierungsstelle",
     "certificateAuthorityHelper": "Welche ACME-CA dieses Zertifikat ausstellt. Standard belassen, um die konfigurierte CA zu verwenden.",

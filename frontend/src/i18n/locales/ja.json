@@ -1516,6 +1516,7 @@
     "termsOfServiceBodyPlaceholder": "ここに規約を入力...\n\n対応：**太字**, *斜体*, [リンク](url), - リスト\n\n段落には空行を使用。",
     "termsOfServiceHelper": "マークダウン風フォーマットのプレーンテキスト。段落には空行を使用。",
     "termsOfServicePreview": "プレビュー",
+    "termsOfServicePreviewHint": "プレビューは目安です。公開される利用規約ページはプレーンテキストとクリック可能なリンクのみで表示され、Markdown の書式は適用されません。",
     "termsOfServiceUrl": "利用規約URL",
     "certificateAuthority": "認証局",
     "certificateAuthorityHelper": "この証明書を発行する ACME CA。デフォルトのままにすると設定済みの CA を使用します。",
